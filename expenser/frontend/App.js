@@ -6,52 +6,67 @@ import { Alert,Button, TextInput,SafeAreaView, StyleSheet, Text, View } from 're
 import axios from 'axios';
 
 
+
 function App() {
-  const [text, onChangeText] = React.useState('Enter Amount');
+  const [text, onChangeText] = React.useState('');
   const [num, onPress] = React.useState(0);
-  const [number, onChangeNumber] = React.useState('');
-  const [profileData, setProfileData] = useState('')
+
 
   function onPressButton(){
-    const baseURL = 'http://localhost:5000/data';
-    // axios.get(baseURL)
-    // .then((response)=> {
-    //   setProfileData(response.data);
-    // })
-    // .catch((error) => {
-    //   if (error.response) {
-    //     console.log(error.response)
-    //     }
-    //   }
-    // )  
-    axios.post(baseURL, {num})
-    .then(response=> {
-      console.log(response);
+    onPress(num + 1)
+    console.log(num);
+    const baseURL = 'https://localhost:5000/data'; 
+    axios.post('https://654e-195-252-220-190.ngrok.io/data', {
+      clicks: text
+   
+    })
+    .then(function (response) {
+      // console.log(response);
     })
     .catch(function (error) {
       console.log(error);
     });
+
+   
     
   };
 
-  console.log(num);
+  
 
   return (
     <View style={styles.container}>
 
       <StatusBar style="auto" />
-      
-      {/* <SafeAreaView>
+      <View style={styles.shadowProp}>
+        <Text style={styles.h1}>
+          Total Spending
+          {'\n'}
+        </Text>
+        <Text style={styles.amount}>
+          $ {num}
+          {'\n'}
+          {'\n'}
+          {'\n'}
+          {'\n'}
+
+        </Text>
+
+      </View>
+     
+      <SafeAreaView>
       <TextInput
         style={styles.input}
         onChangeText={onChangeText}
         value={text}
+        placeholder= "Enter Amount!"
+        color='#1B1B1B'
+        
       />
-      </SafeAreaView> */}
+      </SafeAreaView>
 
       {/* <View style={styles.buttonContainer}> */}
           {/* <Button onPress={onPress} title="Enter" color='#808080'/> */}
-          <Button onPress={() => onPress(num + 1)} title="Enter"/>
+          <Button onPress={() => onPressButton()} title="Enter" color='#808080'/>
       {/* </View> */}
       
 
@@ -76,5 +91,23 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  amount: {
+    fontSize: 60,
+    fontWeight: 'bold',
+  },
+  h1: {
+    fontSize: 30,
+  },
+  shadowProp: {
+    shadowColor: '#808080',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.8,
+    height: 180,
+    width: 250,
+    borderWidth: 1,
+    borderRadius: 12,
+    borderColor: '#808080',
+    shadowRadius: 1,  
+}
 });
 export default App;

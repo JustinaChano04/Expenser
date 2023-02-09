@@ -14,29 +14,29 @@ from flask_cors import CORS,  cross_origin
 
 app = Flask(__name__)
 cors = CORS(app)
-app.config['CORS_HEADERS'] = 'Content-Type'
+# app.config['CORS_HEADERS'] = 'Content-Type'
 
-@app.route('/profile')
-def my_profile():
-    if request.method == 'GET':
-        print("someone requested")
-        response_body = {
-            "name": "Nagato",
-            "about" :"Hello! I'm a full stack developer that loves python and javascript"
-        }
+# @app.route('/profile')
+# @cross_origin()
+# def my_profile():
+#     if request.method == 'GET':
+#         print("someone requested")
+#         response_body = {
+#             "name": "Nagato",
+#             "about" :"Hello! I'm a full stack developer that loves python and javascript"
+#         }
 
-        return "fuck the pigeon holes"
+#         return "fuck the pigeon holes"
 
 
-@app.route('/data')
+@app.route('/data', methods = ['POST'])
 @cross_origin()
 def recv_amount():
     if request.method == 'POST':
-        print("post post post")
-        data = request.form
+        data = request.form()
         print(data)
 
     return "hello"
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)

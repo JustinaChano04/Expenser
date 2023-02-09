@@ -28,6 +28,10 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "infoPlist": {
+      "NSAppTransportSecurity": true,
+      "NSAllowsArbitraryLoads": true
     }
   }
 }
